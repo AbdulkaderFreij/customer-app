@@ -56,6 +56,20 @@ app.get("/api/customers/add?", (req, res) => {
   }
 });
 
+
+app.get("/api/customers/delete/:id?", (req, res) => {
+  const id = req.params.id;
+  if (id < customers.length && id >= 0) {
+    customers.splice(id, 1);
+    res.json({ status: 200, message: "ok", data: customers });
+  } else
+    res.json({
+      status: 404,
+      error: true,
+      message: "the customer <ID> does not exist"
+    });
+});
+
    
 
   

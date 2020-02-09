@@ -48,22 +48,33 @@ class Customers extends Component {
       .then(customers => this.setState({ customers: newList }));
   }
 
+  deleteItem(input){
+    let arr=this.state.customers;
+    arr.splice(input,1)
+    console.log(arr)
+    this.setState({
+        customers:arr
+    });
+  }
   render() {
     return (
       <div>
         <h2>Customers</h2>
         <input
           type="number"
+          placeholder="Enter an ID"
           value={this.state.id}
           onChange={e => this.changeIdInput(e.target.value)}
         />
         <input
           type="text"
+          placeholder="Enter your first name"
           value={this.state.firstName}
           onChange={e => this.changeFirstNameInput(e.target.value)}
         />
         <input
           type="text"
+          placeholder="Enter your last name"
           value={this.state.lastName}
           onChange={e => this.changeLastNameInput(e.target.value)}
         />
@@ -71,8 +82,8 @@ class Customers extends Component {
           add
         </button>
         <ul>
-          {this.state.customers.map(customer => (
-            <li key={customer.id}>
+          {this.state.customers.map((customer, index) => (
+            <li key={customer.id} onClick={() => this.deleteItem(index)}>
               {customer.id} {customer.firstName} {customer.lastName}
             </li>
           ))}
